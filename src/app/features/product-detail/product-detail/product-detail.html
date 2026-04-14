@@ -1,5 +1,7 @@
+
 <section class="product-detail">
 
+    
   <p-button
     label="Volver al catálogo"
     icon="pi pi-arrow-left"
@@ -35,6 +37,7 @@
 
       <div class="product-info">
         <p-tag [value]="p.category" severity="info" />
+        
 
         <h1 class="product-title">{{ p.title }}</h1>
 
@@ -45,10 +48,33 @@
 
         <p class="product-description">{{ p.description }}</p>
 
+        <ul class="product-highlights">
+    <p>✔ Producto original</p>
+    <p>✔ Garantía incluida</p>
+    <p>✔ Devoluciones en 30 días</p>
+        </ul>
+
         <div class="product-price">${{ p.price.toFixed(2) }}</div>
+        
+        
 
         <div class="product-actions">
-          <p-button label="Agregar al carrito" icon="pi pi-shopping-cart" styleClass="w-full" />
+            
+          <!-- <p-button label="Agregar al carrito" icon="pi pi-shopping-cart" styleClass="w-full" />
+            -->
+          <div class="product-actions">
+  <p-button
+    label="Agregar al carrito"
+    icon="pi pi-shopping-cart"
+    styleClass="w-full add-cart"
+  />
+
+  <p-button
+    label="Comprar ahora"
+    severity="secondary"
+    styleClass="w-full buy-now"
+  />
+</div>
         </div>
       </div>
     </div>

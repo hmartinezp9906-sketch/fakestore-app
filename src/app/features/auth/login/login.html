@@ -25,27 +25,30 @@
           [toggleMask]="true"
           placeholder="Ingresa tu contraseña"
           styleClass="w-full"
-        />
-        @if (form.controls.password.touched && form.controls.password.errors?.['required']) {
+            />
+            @if (form.controls.password.touched && form.controls.password.errors?.['required']) {
           <small class="error-text">La contraseña es obligatoria</small>
-        }
-        @if (form.controls.password.touched && form.controls.password.errors?.['minlength']) {
+            }
+            @if (form.controls.password.touched && form.controls.password.errors?.['minlength']) {
           <small class="error-text">Mínimo 4 caracteres</small>
-        }
-      </div>
+            }
+            </div>
 
-      @if (errorMessage()) {
-        <p-message severity="error" [text]="errorMessage()!" styleClass="w-full" />
-      }
+             @if (errorMessage()) {
+            <p-message severity="error" [text]="errorMessage()!" styleClass="w-full" />
+            }
 
-      <p-button
-        type="submit"
-        label="Ingresar"
-        icon="pi pi-sign-in"
-        [loading]="loading()"
-        [disabled]="loading()"
-        styleClass="w-full"
-      />
-    </form>
-  </p-card>
-</div>
+            <p-button
+            type="submit"
+            label="Ingresar"
+            icon="pi pi-sign-in"
+            [loading]="loading()"
+            [disabled]="loading()"
+            styleClass="w-full"
+            />
+            
+            </form>
+            </p-card>
+                </div>
+
+
