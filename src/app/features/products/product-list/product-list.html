@@ -1,0 +1,77 @@
+<section class="product-list">
+
+  <header class="filters">
+    <h2>Catálogo de productos</h2>
+
+    <div class="filter-controls">
+      <span class="p-input-icon-left search-wrapper">
+        <i class="pi pi-search"></i>
+        <input
+          pInputText
+          type="text"
+          placeholder="Buscar por nombre..."
+          [ngModel]="searchTerm()"
+          (ngModelChange)="searchTerm.set($event)"
+        />
+      </span>
+
+      <p-select
+        [options]="categories()"
+        [ngModel]="selectedCategory()"
+        (ngModelChange)="selectedCategory.set($event)"
+        optionLabel="label"
+        optionValue="value"
+        placeholder="Filtrar por categoría"
+        styleClass="category-select"
+      />
+    </div>
+  </header>
+
+  @if (loading()) {
+    <div class="skeleton-grid">
+      @for (_ of [1,2,3,4,5,6,7,8]; track _) {
+        <div class="skeleton-card">
+          <p-skeleton height="180px" />
+          <p-skeleton height="1rem" styleClass="mt-2" />
+          <p-skeleton height="1rem" width="60%" styleClass="mt-2" />
+        </div>
+      }
+    </div>
+  }
+
+  @if (error()) {
+    <p-message severity="error" [text]="error()!" styleClass="w-full" />
+  }
+
+  @if (!loading() && !error()) {
+    @if (filteredProducts().length === 0) {
+      <p-message severity="info" text="No se encontraron productos con esos filtros." />
+    } @else {
+      <p-dataview [value]="filteredProducts()" layout="grid">
+        <ng-template #grid let-items>
+          <div class="product-grid">
+            @for (product of items; track product.id) {
+              <article class="product-card" [routerLink]="['/products', product.id]">
+                <div class="product-image">
+                  <img
+                    [src]="product.image"
+                    [alt]="product.title"
+                    (error)="onImageError($event)"
+                  />
+                </div>
+                <div class="product-info">
+                  <p-tag [value]="product.category" severity="info" styleClass="mb-2" />
+                  <h3 class="product-title">{{ product.title }}</h3>
+                  <div class="product-footer">
+                    <span class="product-price">${{ product.price.toFixed(2) }}</span>
+                    <p-button icon="pi pi-eye" [rounded]="true" severity="secondary" size="small" />
+                  </div>
+                </div>
+              </article>
+            }
+          </div>
+        </ng-template>
+      </p-dataview>
+    }
+  }
+</section>

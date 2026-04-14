@@ -1,0 +1,56 @@
+<section class="product-detail">
+
+  <p-button
+    label="Volver al catálogo"
+    icon="pi pi-arrow-left"
+    severity="secondary"
+    [text]="true"
+    (onClick)="goBack()"
+    styleClass="back-button"
+  />
+
+  @if (loading()) {
+    <div class="detail-layout">
+      <p-skeleton height="400px" styleClass="skeleton-image" />
+      <div class="skeleton-info">
+        <p-skeleton height="1.5rem" width="40%" />
+        <p-skeleton height="2rem" styleClass="mt-3" />
+        <p-skeleton height="1rem" styleClass="mt-3" />
+        <p-skeleton height="1rem" width="80%" styleClass="mt-2" />
+        <p-skeleton height="1rem" width="60%" styleClass="mt-2" />
+        <p-skeleton height="2.5rem" width="30%" styleClass="mt-4" />
+      </div>
+    </div>
+  }
+
+  @if (error()) {
+    <p-message severity="error" [text]="error()!" styleClass="w-full" />
+  }
+
+  @if (product(); as p) {
+    <div class="detail-layout">
+      <div class="product-image">
+        <img [src]="p.image" [alt]="p.title" (error)="onImageError($event)" />
+      </div>
+
+      <div class="product-info">
+        <p-tag [value]="p.category" severity="info" />
+
+        <h1 class="product-title">{{ p.title }}</h1>
+
+        <div class="product-rating">
+          <p-rating [ngModel]="p.rating.rate" [readonly]="true" />
+          <span class="rating-count">({{ p.rating.count }} reseñas)</span>
+        </div>
+
+        <p class="product-description">{{ p.description }}</p>
+
+        <div class="product-price">${{ p.price.toFixed(2) }}</div>
+
+        <div class="product-actions">
+          <p-button label="Agregar al carrito" icon="pi pi-shopping-cart" styleClass="w-full" />
+        </div>
+      </div>
+    </div>
+  }
+</section>

@@ -1,0 +1,15 @@
+<header class="app-header">
+  <h1 routerLink="/products" class="logo">🛒 FakeStore</h1>
+
+  <p-button
+    label="Cerrar sesión"
+    icon="pi pi-sign-out"
+    severity="secondary"
+    [text]="true"
+    (onClick)="logout()"
+  />
+</header>
+
+<main class="app-main">
+  <router-outlet />
+</main>
